@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff2ee">
+<title>For Palak ♡ — My SweetHeart & Malkin Ji</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+:root{
+  --cream: #fff9f3;
+  --pink: #fbe5e8;
+  --rose: #c64e69;
+  --deep: #5f2332;
+  --coffee: #5b3c33;
+  --ink: #3d2928;
+  --muted: #8b706b;
+  --line: #eed3cb;
+  --white: #ffffff;
+  --card-bg: #fffdfa;
+  --shadow-soft: 0 10px 30px rgba(110, 48, 55, 0.07);
+  --shadow-hover: 0 16px 40px rgba(110, 48, 55, 0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background: var(--cream);
+  background-image: radial-gradient(#d9a8a524 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+button{font:inherit;cursor:pointer; outline:none;}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:90;
+  background: rgba(255, 249, 243, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(238, 211, 203, 0.6);
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;padding:12px 20px;flex-wrap:wrap;
+  box-shadow: 0 4px 30px rgba(95, 35, 50, 0.04);
+}
+.brand{
+  font-family: 'Playfair Display', serif;font-weight:700;font-size:1.1rem;
+  color: var(--deep);margin-right:16px;display:flex;align-items:center;gap:6px;
+}
+.nav button{
+  border:0;background:transparent;color:var(--coffee);
+  padding:8px 16px;border-radius:30px;font-size:0.9rem;font-weight:500;
+  transition:all .3s ease;
+}
+.nav button.active, .nav button:hover{
+  background: var(--pink);color: var(--deep);
+}
+.heartbtn{font-size:1.25rem!important;color:var(--rose)!important;padding:6px 12px!important;}
+.music-toggle{font-size:.9rem;background:white!important;border:1px solid var(--line)!important;border-radius:20px;padding:6px 14px!important;color:var(--deep)!important; box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
+.music-toggle:hover{ background: var(--pink)!important; border-color: #e2b6bf!important; }
+.music-toggle.playing { background: var(--pink)!important; border-color: var(--rose)!important; }
+
+/* PAGE CONTAINERS */
+.page{
+  display:none;min-height:calc(100vh - 60px);
+  padding:clamp(30px, 6vw, 70px) 20px 80px;
+}
+.page.active{
+  display:block;
+  animation:pageIn .6s cubic-bezier(.2,.8,.25,1) both;
+}
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(20px);filter:blur(3px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+.wrap{max-width:1000px;margin:auto}
+.center{text-align:center}
+.eyebrow{
+  text-transform:uppercase;letter-spacing:0.25em;font-size:0.75rem;font-weight:700;color:var(--rose);margin-bottom:10px;
+}
+h1,h2,h3{font-family:'Playfair Display',serif;color:var(--deep);line-height:1.2}
+h1{font-size:clamp(3rem,8vw,6rem);margin:16px 0; letter-spacing: -0.02em;}
+h2{font-size:clamp(2.2rem,5vw,3.5rem);margin:12px 0 16px; letter-spacing: -0.01em;}
+h3{font-size:1.4rem;margin-bottom:10px}
+p{line-height:1.8;color:var(--ink)}
+.sub{color:var(--muted);max-width:680px;margin:0 auto 32px;font-size:1.05rem}
+.script{font-family:'Caveat',cursive;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--rose); line-height: 1.3;}
+
+/* HERO SCRAPBOOK */
+.hero{
+  position:relative;overflow:hidden;
+  background: linear-gradient(135deg, #fff3f5 0%, #fffbf8 48%, #f6e8e0 100%);
+  border: 1px solid #ebd3cd;border-radius:40px;
+  padding:clamp(45px,10vw,100px) 24px;text-align:center;
+  box-shadow: var(--shadow-soft);
+}
+.hero::before, .hero::after{
+  content:'♡';position:absolute;color:rgba(198, 78, 105, 0.08);
+  font-size:12rem;font-family:serif;pointer-events:none;
+}
+.hero::before{top:-40px;left:2%;animation:gentleSway 8s ease-in-out infinite}
+.hero::after{bottom:-60px;right:3%;animation:gentleSway 9s ease-in-out infinite reverse}
+@keyframes gentleSway{
+  0%,100%{transform:translateY(0) rotate(-5deg)}
+  50%{transform:translateY(-15px) rotate(5deg)}
+}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(231, 186, 194, 0.6);background:rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  border-radius:99px;padding:10px 20px;color:var(--deep);
+  font-size:0.9rem;font-weight:600;box-shadow:0 4px 15px rgba(198, 78, 105, 0.05);
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  border:0;border-radius:999px;background:var(--rose);color:#fff;
+  padding:15px 32px;font-weight:600;font-size:1rem;
+  box-shadow:0 10px 25px rgba(198, 78, 105, 0.25);
+  transition:all .3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 15px 35px rgba(198, 78, 105, 0.35)}
+.btn.secondary{
+  background:#fff;color:var(--deep);border:1px solid var(--line);
+  box-shadow:0 6px 20px rgba(95, 35, 50, 0.05);
+}
+.btn.secondary:hover{background:var(--pink);border-color:#e2b6bf}
+.btnrow{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+
+/* GRID & CARDS */
+.grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px;
+}
+.card{
+  background:var(--card-bg);border:1px solid rgba(238, 211, 203, 0.6);border-radius:28px;
+  padding:32px 26px;box-shadow:var(--shadow-soft);
+  transition:all .4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-align:left;position:relative;overflow:hidden;
+}
+.card:hover{
+  transform:translateY(-8px);box-shadow:var(--shadow-hover);border-color:#e4bac1;
+}
+.card-img {
+  width: 100%; 
+  height: auto; 
+  max-height: 300px; 
+  object-fit: contain; 
+  border-radius: 16px; 
+  background: #fff1f4;
+  margin-bottom: 14px; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+@media(min-width:851px){
+  .grid:has(> .card:nth-child(7):last-child) .card:last-child {
+    grid-column: 2; /* Centers the 7th card cleanly */
+  }
+}
+
+/* FUR BABIES INTERACTION */
+.fur-zone{
+  margin-top:48px;background: linear-gradient(to right, #fffdfa, #fff5f0, #fffdfa); 
+  border:1px dashed var(--line);
+  border-radius:32px;padding:32px;display:flex;align-items:center;justify-content:space-around;
+  flex-wrap:wrap;gap:24px; box-shadow: inset 0 0 20px rgba(238, 211, 203, 0.2);
+}
+.pet-btn{
+  background:#fff;border:1px solid var(--line);border-radius:20px;
+  padding:16px 24px;display:flex;align-items:center;gap:12px;font-size:1.1rem;
+  font-weight: 500; color: var(--coffee);
+  box-shadow:0 6px 20px rgba(91, 60, 51, 0.05);transition:all .3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.pet-btn:hover{transform:scale(1.06) translateY(-4px);border-color:var(--rose); color: var(--rose); box-shadow:0 10px 25px rgba(198, 78, 105, 0.15);}
+
+/* POLAROIDS */
+.memory-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px;
+  padding: 20px;
+}
+.polaroid{
+  background:#fff;padding:16px 16px 24px;
+  box-shadow:0 12px 30px rgba(91, 60, 51, 0.08);
+  transform:rotate(var(--tilt));border:1px solid #ebd9cf;
+  transition:all .4s cubic-bezier(.2,.8,.2,1);position:relative;
+  border-radius:6px;
+}
+.polaroid:hover{
+  transform:rotate(0deg) translateY(-12px) scale(1.05)!important;
+  box-shadow:0 25px 50px rgba(91, 60, 51, 0.18);z-index:10;
+}
+.polaroid .img-box{
+  width:100%;aspect-ratio:1/1;object-fit:cover;background:#faeae5;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;border:1px solid #f0ded6;border-radius:4px;overflow:hidden;
+}
+.polaroid img{width:100%;height:100%;object-fit:cover}
+.caption{
+  font-family:'Caveat',cursive;color:var(--coffee);
+  font-size:1.6rem;text-align:center;margin-top:16px;
+}
+.photo-uploader{
+  margin-top:40px;background:rgba(255,255,255,0.8); backdrop-filter: blur(8px);
+  padding:20px 30px;border-radius:24px;
+  display:inline-flex;align-items:center;gap:16px;border:1px dashed var(--rose);
+  box-shadow:var(--shadow-soft); transition: all 0.3s;
+}
+.photo-uploader:hover { background: #fff; transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.photo-uploader input{display:none}
+
+/* WAX ENVELOPE & LETTER */
+.envelope-wrap{
+  max-width:840px;margin:40px auto 0; perspective: 1000px;
+}
+.envelope{
+  background: linear-gradient(145deg, #fffdfa, #fdf6f3);
+  border:1px solid #ecd3c8;
+  border-radius:32px;padding:40px;box-shadow:0 20px 50px rgba(95, 35, 50, 0.08);
+  position:relative;transition:all .5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.wax-seal{
+  width:72px;height:72px;
+  background: radial-gradient(circle at 30% 30%, #e25a77, #9b2841);
+  color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;box-shadow:0 8px 25px rgba(155, 40, 65, 0.4);
+  font-size:1.8rem;cursor:pointer;border:2px dashed rgba(255, 204, 214, 0.5);
+  transition:transform .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.wax-seal:hover{transform:scale(1.15) rotate(15deg)}
+.letter{
+  background-color:#fffefc;
+  background-image:repeating-linear-gradient(transparent 0, transparent 35px, rgba(238, 221, 214, 0.5) 36px);
+  border:1px solid #ebd4cb;padding:clamp(30px,6vw,70px);
+  border-radius:20px;line-height:2.2;font-size:1.1rem;text-align:left;
+  box-shadow:inset 0 0 40px rgba(239, 212, 204, 0.15), 0 10px 30px rgba(0,0,0,0.03);
+  position:relative; color: var(--coffee);
+}
+.letter p{margin-bottom:20px;line-height:2.1; position: relative; z-index: 2;}
+.letter-hidden{display:none}
+
+/* DATE INVITATION BOX */
+.datebox{
+  background:linear-gradient(140deg, #fffdfa 0%, #fef1f3 100%);
+  border:1px solid var(--line);border-radius:32px;
+  padding:clamp(30px,6vw,60px);max-width:860px;margin:40px auto;
+  box-shadow:var(--shadow-soft);
+}
+.date-options{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0;
+}
+.date-option{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  background:#fff;border:1px solid rgba(238, 211, 203, 0.6);border-radius:20px;
+  padding:18px 22px;cursor:pointer;transition:all .3s ease;font-size:1rem;
+}
+.date-option:hover{transform:translateY(-4px);border-color:#e4bac1;box-shadow:var(--shadow-soft)}
+.date-option input{accent-color:var(--rose);width:22px;height:22px; cursor: pointer;}
+.date-option:has(input:checked){
+  border-color:var(--rose);background:#fff3f6;font-weight:600;color:var(--deep);
+  box-shadow: 0 4px 15px rgba(198, 78, 105, 0.1);
+}
+.response{
+  margin-top:30px;padding:24px;border-radius:20px;
+  background:#fff;border:1px dashed var(--rose);display:none;
+  animation:pageIn .5s ease; box-shadow: var(--shadow-soft);
+  font-size: 1.05rem; line-height: 1.6;
+}
+
+/* FLOATING PARTICLES & ANIMATIONS */
+.floating-love{
+  position:fixed;bottom:-40px;z-index:9999;pointer-events:none;
+  animation:floatLove var(--dur,4.5s) ease-out forwards;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+@keyframes floatLove{
+  0%{opacity:0;transform:translateY(0) scale(.6)}
+  15%{opacity:1}
+  100%{opacity:0;transform:translateY(-110vh) rotate(var(--rot,25deg)) scale(1.5)}
+}
+.footer{text-align:center;padding:40px 20px;color:var(--muted);font-size:0.95rem; margin-top: 40px;}
+.float{
+  position:fixed;bottom:24px;right:24px;border:0;border-radius:50%;
+  width:56px;height:56px;background:#fff8f4;color:var(--rose);
+  box-shadow:0 8px 25px rgba(95, 35, 50, 0.15);font-size:1.5rem;z-index:90;
+  display:flex;align-items:center;justify-content:center; transition: all 0.3s;
+}
+.float:hover { transform: translateY(-5px); box-shadow:0 12px 30px rgba(95, 35, 50, 0.25); background: #fff;}
+
+/* SURPRISE CAKE SECTION */
+#surpriseSection { display: none; margin-top: 40px; animation: pageIn 0.8s ease; }
+.cake-container { position: relative; width: 100%; max-width: 300px; margin: 0 auto; cursor: pointer; transition: transform 0.3s; }
+.cake-container:hover { transform: scale(1.04) rotate(-2deg); }
+.cake-img { width: 100%; height: 300px; object-fit: cover; border-radius: 20px; box-shadow: 0 10px 30px rgba(198, 78, 105, 0.2); transition: opacity 0.4s ease; border: 4px solid #fff; }
+.cake-instruction { font-family: 'Caveat', cursive; font-size: 2rem; color: var(--rose); margin-top: 15px; font-weight: 600; animation: gentleSway 3s infinite; }
+#surpriseMessage { display: none; margin-top: 35px; padding: 30px 20px; background: #fff; border-radius: 24px; border: 1px dashed var(--rose); box-shadow: var(--shadow-hover); animation: pageIn 1s ease; }
+#surpriseMessage p { font-size: 1.25rem; line-height: 1.8; color: var(--deep); margin-bottom: 12px; }
+
+/* RESPONSIVE */
+@media(max-width:850px){
+  .grid, .memory-grid{grid-template-columns:repeat(2,1fr)}
+  .date-options{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .grid, .memory-grid{grid-template-columns:1fr}
+  .nav { padding: 10px; gap: 4px; }
+  .nav button{padding:6px 12px;font-size:0.85rem}
+  .brand{width:100%;text-align:center;justify-content:center;margin-bottom:8px}
+  .page { padding-top: 20px; }
+  .memory-grid { padding: 0; }
+  .envelope { padding: 24px; }
+  .letter { padding: 24px 20px; font-size: 1.05rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <span class="brand">☕ for my Cappuccino ♡</span>
+  <button class="active" data-page="home">Home</button>
+  <button data-page="about">About Palak</button>
+  <button data-page="memories">Memories</button>
+  <button data-page="letter">Her Letter</button>
+  <button data-page="date">The Date</button>
+  <button data-page="future">Us, Always</button>
+  <button class="heartbtn" id="heartBtn" title="Send a heart">♥</button>
+  <button class="music-toggle" id="musicToggle">🎵 Play Melodies</button>
+</nav>
+
+<main>
+  <!-- PAGE 1: HOME / MIDNIGHT -->
+  <section class="page active" id="home">
+    <div class="wrap hero">
+      <div class="pill">✨ A tiny corner of the internet, made only for Palak</div>
+      <div class="script" style="margin-top:32px">For my SweetHeart, my Cappuccino…</div>
+      <h1>Happy Birthday,<br>Palak <span style="color:var(--rose)">♡</span></h1>
+      <p class="sub">To the girl who makes everyday ordinary moments feel like my absolute favourite ones.<br>Today is yours. This little universe is yours, too.</p>
+      <div class="pill" style="background: rgba(255,255,255,0.7)">My SweetHeart · My Cappuccino · My Malkin Ji 👑</div>
+      
+      <div class="btnrow">
+        <button class="btn" data-go="about">Open your surprise ♡</button>
+        <button class="btn secondary" data-go="letter">Read your letter ✉️</button>
+      </div>
+
+      <div class="script" style="margin-top:45px">P.S. You're so deeply loved. Always. ♡</div>
+    </div>
+    <div class="footer">Made with a full heart, a little nervousness, and endless love ♥</div>
+  </section>
+
+  <!-- PAGE 2: ABOUT PALAK -->
+  <section class="page" id="about">
+    <div class="wrap center">
+      <div class="eyebrow">chapter one · the girl herself</div>
+      <h2>A Little About You</h2>
+      <p class="sub">I could write a thousand pages. Somehow, the simplest things about you are the ones that melt me completely.</p>
+      
+      <div class="grid">
+        <article class="card">
+          <img src="Smileeee.jpeg" class="card-img" alt="Your Smile" onerror="this.src='https://placehold.co/400x400/fbe5e8/c64e69?text=Your+Smile'">
+          <h3>Your Smile</h3>
+          <p>The way you smile can turn my whole day into the best day. It's warm, effortless, and honestly contagious.</p>
+        </article>
+        
+        <article class="card">
+          <img src="Both us pic.jpeg" class="card-img" alt="Your Breathing" onerror="this.src='https://placehold.co/400x400/fbe5e8/c64e69?text=Your+Breathing'">
+          <h3>Your Breathing</h3>
+          <p>Even the softest, simplest thing about you feels precious. The way you breathe, exist, laugh, and just <em>are</em>.</p>
+        </article>
+        
+        <article class="card">
+          <img src="Standing shadow us sarb.jpg" class="card-img" alt="My Cappuccino" onerror="this.src='https://placehold.co/400x400/fbe5e8/c64e69?text=My+Cappuccino'">
+          <h3>My Cappuccino</h3>
+          <p>Warm, cozy, and capable of turning an ordinary afternoon into a calm café corner I never want to leave.</p>
+        </article>
+        
+        <article class="card">
+          <img src="Malkin ji.jpeg" class="card-img" alt="My Malkin Ji" onerror="this.src='https://placehold.co/400x400/fbe5e8/c64e69?text=My+Malkin+Ji'">
+          <h3>My Malkin Ji</h3>
+          <p>Yes, you're my junior… but respectfully, madam, the ownership papers of my heart are clearly in your name.</p>
+        </article>
+        
+        <article class="card">
+          <!-- Video tag with attributes to make it play silently and continuously like a GIF -->
+          <video src="Fur.mp4" class="card-img" autoplay loop muted playsinline style="object-fit: cover;"></video>
+          <h3>Street Fur Babies</h3>
+          <p>Every stray dog and stray kitten we walk past deserves a warm hello. I love how big and soft your heart is for them.</p>
+        </article>
+        
+        <article class="card">
+          <img src="sHADOW OF US.jpeg" class="card-img" alt="Your Whole Self" onerror="this.src='https://placehold.co/400x400/fbe5e8/c64e69?text=Your+Whole+Self'">
+          <h3>Your Whole Self</h3>
+          <p>I don't love just your brightest days. I love the sleepy, quiet, goofy, excited, and genuine Palak every single day.</p>
+        </article>
+
+        <article class="card">
+          <img src="Eyes Pic.jpeg" class="card-img" alt="Your Eyes" onerror="this.src='https://placehold.co/400x400/fbe5e8/c64e69?text=Your+Eyes'">
+          <h3>Your Eyes</h3>
+          <p>The most beautiful, deep eyes that I can get completely lost in. Every glance feels like home.</p>
+        </article>
+      </div>
+
+      <!-- INTERACTIVE PET SECTION -->
+      <div class="fur-zone">
+        <button class="pet-btn" onclick="petAnimal('cat')">🐾 Pet Street Cat (Purr)</button>
+        <div class="script" style="font-size:1.6rem; color: var(--rose);">Because Palak can never ignore a street fur baby! 🥺</div>
+        <button class="pet-btn" onclick="petAnimal('dog')">🐕 Boop Street Puppy (Tail Wag)</button>
+      </div>
+
+      <p class="script" style="margin-top:45px">You don't have to do anything extra to be my favourite. You just have to be you. ♡</p>
+    </div>
+  </section>
+
+  <!-- PAGE 3: MEMORIES -->
+  <section class="page" id="memories">
+    <div class="wrap center">
+      <div class="eyebrow">chapter two · our little universe</div>
+      <h2>All Our Days, Somehow</h2>
+      <p class="sub">Big days, small days, quiet days, and weird ones. Somehow, I keep wanting every tomorrow with you.</p>
+
+      <div class="memory-grid">
+        <div class="polaroid" style="--tilt:-3deg">
+          <div class="img-box"><img src="photos/photo1.jpg" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=80'" alt="Memory 1"></div>
+          <div class="caption">You + me ♡</div>
+        </div>
+        <div class="polaroid" style="--tilt:3.5deg">
+          <div class="img-box"><img src="photos/photo2.jpg" onerror="this.src='https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=500&auto=format&fit=crop&q=80'" alt="Memory 2"></div>
+          <div class="caption">Café dates & cozy talks ☕</div>
+        </div>
+        <div class="polaroid" style="--tilt:-2.5deg">
+          <div class="img-box"><img src="photos/photo3.jpg" onerror="this.src='https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=500&auto=format&fit=crop&q=80'" alt="Memory 3"></div>
+          <div class="caption">Fur babies & hello walks 🐾</div>
+        </div>
+        <div class="polaroid" style="--tilt:2.8deg">
+          <div class="img-box"><img src="photos/photo4.jpg" onerror="this.src='https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=500&auto=format&fit=crop&q=80'" alt="Memory 4"></div>
+          <div class="caption">My favourite kind of chaos</div>
+        </div>
+        <div class="polaroid" style="--tilt:-3.2deg">
+          <div class="img-box"><img src="photos/photo5.jpg" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500&auto=format&fit=crop&q=80'" alt="Memory 5"></div>
+          <div class="caption">My person, my safe place ♡</div>
+        </div>
+        <div class="polaroid" style="--tilt:2deg">
+          <div class="img-box"><img src="photos/photo6.jpg" onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&auto=format&fit=crop&q=80'" alt="Memory 6"></div>
+          <div class="caption">Many more memories to come…</div>
+        </div>
+      </div>
+
+      <!-- Quick Upload for Phone / Local Testing -->
+      <label class="photo-uploader">
+        <span>📸 Tap here to upload your own photos into the polaroids instantly:</span>
+        <input type="file" id="photoInput" multiple accept="image/*">
+        <button type="button" class="btn secondary" style="padding:8px 16px;font-size:0.9rem" onclick="document.getElementById('photoInput').click()">Pick Photos</button>
+      </label>
+
+      <!-- Inside Joke Card -->
+      <div class="card" style="max-width:760px;margin:48px auto;text-align:left; background: linear-gradient(135deg, #fffdfa, #fdf4f6);">
+        <div class="script">Our legendary inside question</div>
+        <h3 style="font-size:1.8rem;margin-top:10px; color: var(--rose);">“Apse ho payega?”</h3>
+        <p style="font-size: 1.1rem; margin-top: 12px;">And then the smiling babes energy: <strong>“U gonna cuddle me rest?”</strong> 😭♡</p>
+        <p style="margin-top:12px">From funny dates to unpredictable days, that phrase became a badge of our bond. My answer will always be the same: <em>Haanji Malkin Ji, ho payega.</em> We'll figure out every chapter together with patience, laughs, and tight cuddles.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4: HEARTFELT LETTER -->
+  <section class="page" id="letter">
+    <div class="wrap center">
+      <div class="eyebrow">chapter three · from my heart to yours</div>
+      <h2>A Letter For My Girl</h2>
+      <p class="sub">Tap the wax seal to unlock and read your letter, SweetHeart.</p>
+
+      <div class="envelope-wrap">
+        <div class="envelope" id="envelopeBox">
+          <div class="wax-seal" id="waxSeal" title="Click to break seal">💌</div>
+          <div class="script" id="sealPrompt" style="margin-bottom:14px; color: var(--muted);">Tap the wax seal to unfold...</div>
+
+          <article class="letter letter-hidden" id="letterBody">
+            <p style="font-size: 1.15rem; font-weight: 500;">Hey Palak, my SweetHeart 💖, my Cappuccino ☕, my Malkin Ji 👑... ♡</p>
+            
+            <p style="font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--rose); margin: 24px 0;">🎉 Happy Birthday, my love! 🎉 🎂 ✨</p>
+            
+            <p>I don't even know where to start, because there's so much I want to say and so many little things I love about you. I could try to make this the most perfect letter ever, but honestly, I just want it to sound like me talking to you — because that's what you deserve.</p>
+            
+            <p>We've been through a lot of days together. Like, literal each-and-every-day kinds of days. Some must have been easy, some probably not so easy, and some where all we could do was ask each other, "Aps ho payega?" 😂 And somehow, that tiny question says so much about us. About trying. About figuring things out. About being a little silly even when life gets serious. About looking at each other and choosing to keep going, one day at a time. 🫂</p>
+            
+            <p>And then there's you. The way you smile — God, your smile. ☺️ It can make my day the best without even trying. The way you breathe, the way you exist, the way you can just be there and make an ordinary moment feel important. I love those little details that might seem small to someone else. To me, they're you. And you are never a small thing to me. ❤️</p>
+            
+            <p>But there's something I think about, too: what makes your day the best? I hope it's not only me saying all these things. I hope life is gentle with you. I hope you get reasons to smile that belong only to you — dreams coming true, good surprises, peace in your mind, people appreciating you, moments where you feel proud of yourself, and days when you look around and think, "Yaar, life is actually beautiful." 🌸 You deserve that kind of happiness, not just today but on regular random Tuesdays too.</p>
+            
+            <p>I love that you're my SweetHeart. I love calling you my Cappuccino ☕. And calling you my Malkin Ji? Obviously, madam, that is a position of great authority 🧐 and I accept my duties — including but not limited to listening to you, making you smile, planning cozy dates, and being available for cuddles when the world gets too much. 🎀</p>
+            
+            <p>I want more café dates with you ☕ 🍰. More sitting across from you and forgetting to check the time. More walks where we stop because a cat decided we're friends now 🐱, or a street dog deserves a little kindness🐶. More conversations that begin with something random and somehow end up being about everything. More laughter, more food stealing 🍟, more pictures, more memories, and more of those "just us" moments where nobody needs to be impressive or have everything figured out.</p>
+            
+            <p>And if some days aren't perfect, I don't want us to feel like we have to pretend they are. I want us to be able to talk, listen, learn, apologise when needed, laugh when we can, and give each other room to be human. No grand promises that life will always be easy — just a wish to keep meeting the days honestly, with care for each other. 🤝 ❤️</p>
+            
+            <p>On your birthday, I hope you feel celebrated for the person you already are. Not for what you do for everyone else, not for how much you give, not for being strong all the time. Just because you're Palak. Because you are you. And that is already worth celebrating in a thousand different ways. 🎂</p>
+            
+            <p>Thank you for being part of my days, for all the moments we've collected, for the smiles, the silliness, the questions, and the little world that's ours. I feel lucky that I get to know you this closely and keep discovering new things to love about you. 🥺 💖</p>
+            
+            <p>So here's to another year of you being wonderfully you. I hope this year brings you softness when you're tired, courage when you're unsure, joy when you least expect it, and a whole lot of reasons to smile that make your cheeks hurt. 😊 🌟</p>
+            
+            <p>And here's to us making more memories — slowly, sweetly, in our own way. No rush. Just us. ♡</p>
+            
+            <p>Happy Birthday, Palak. I love you. Always, in all the little ways and the big ones. 💕</p>
+            
+            <p class="script" style="text-align:right; margin-top:40px; font-size: 2.2rem; color: var(--rose);">Yours, Akash always ♡</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 5: THE DATE INVITATION -->
+  <section class="page" id="date">
+    <div class="wrap center">
+      <div class="eyebrow">chapter four · a tiny invitation</div>
+      <h2>My Malkin Ji, May I Steal a Little Time?</h2>
+      <p class="sub">No rush. No pressure. Just you, me, cozy warmth, and whatever pace feels right.</p>
+
+      <div class="datebox">
+        <div class="script" style="font-size: 2rem;">An official invitation for our cozy date</div>
+        <p style="font-size:1.15rem;margin-top:12px; color: var(--deep);">I'd love to take you out on a date — just a little pocket of time where our phones stay aside, nobody has to rush, and the world is just you and me.</p>
+        <p style="margin-top:10px; font-weight: 500;">Since madam is the Malkin Ji, <strong>you choose the vibe:</strong></p>
+
+        <form id="dateForm">
+          <div class="date-options">
+            <label class="date-option">
+              <input type="checkbox" name="date" value="☕ Cozy Café + Deep Talks" checked>
+              ☕ Cozy Café + Deep Talks
+            </label>
+            <label class="date-option">
+              <input type="checkbox" name="date" value="🧁 Pastry Dates & Sweet Walks">
+              🧁 Pastry Dates & Sweet Walks
+            </label>
+            <label class="date-option">
+              <input type="checkbox" name="date" value="🐾 Hello to Street Cats & Dogs">
+              🐾 Hello to Street Cats & Dogs
+            </label>
+            <label class="date-option">
+              <input type="checkbox" name="date" value="🧸 Cuddle Me Rest & Netflix">
+              🧸 "Cuddle Me Rest" & Relax
+            </label>
+            <label class="date-option">
+              <input type="checkbox" name="date" value="✨ Surprise Planned by You">
+              ✨ Surprise planned by me
+            </label>
+            <label class="date-option">
+              <input type="checkbox" name="date" value="👑 Malkin Ji Decides On Spot">
+              👑 Malkin Ji decides on the spot!
+            </label>
+          </div>
+
+          <label for="dateNote" style="display:block;text-align:left;font-weight:600;margin:24px 0 8px; color: var(--deep);">Any special wish or favourite café in mind?</label>
+          <textarea id="dateNote" rows="3" placeholder="Tell me what you're craving, or just write 'u gonna cuddle me rest?' ♡" style="width:100%;border:1px solid var(--line);border-radius:18px;padding:16px;font:inherit;background:#fff;outline:none; resize: vertical; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); transition: border-color 0.3s;"></textarea>
+
+          <div class="btnrow">
+            <button type="submit" class="btn">Confirm My Date Wish ♡</button>
+            <button type="button" id="copyDate" class="btn secondary">📋 Copy Message</button>
+            <button type="button" id="waDate" class="btn" style="background:#25d366; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.25);">💬 Send on WhatsApp</button>
+          </div>
+        </form>
+
+        <div class="response" id="dateResponse" aria-live="polite"></div>
+        <p class="script" style="margin-top:35px">No rush. Just us. Whatever makes you smile. ♡</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 6: US, ALWAYS -->
+  <section class="page" id="future">
+    <div class="wrap center">
+      <div class="eyebrow">chapter five · still choosing the next page</div>
+      <h2>More Us, Please</h2>
+      <p class="sub">Not a claim that every day will be flawless, but a genuine wish for more gentle, honest days together.</p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="emoji">☕</div>
+          <h3>More Cafés</h3>
+          <p>Warm cups, corner tables, sharing pastries we swore we'd take home, and letting hours slip past.</p>
+        </article>
+        <article class="card">
+          <div class="emoji">🐾</div>
+          <h3>More Fur Encounters</h3>
+          <p>Stopping to pet every friendly dog or cat along the lanes, smiling at their wagging tails.</p>
+        </article>
+        <article class="card">
+          <div class="emoji">🌙</div>
+          <h3>More Slow Moments</h3>
+          <p>Sitting in peaceful silence without checking our phones, knowing home is right next to each other.</p>
+        </article>
+        <article class="card">
+          <div class="emoji">📸</div>
+          <h3>More Memories</h3>
+          <p>Dorky polaroids, car laughter, accidental inside jokes, and silly stories for our future selves.</p>
+        </article>
+        <article class="card">
+          <div class="emoji">🫶</div>
+          <h3>More Understanding</h3>
+          <p>Listening attentively, giving room to breathe when tired, and learning how to love each other better every day.</p>
+        </article>
+        <article class="card">
+          <div class="emoji">💗</div>
+          <h3>More You and Me</h3>
+          <p>In our own rhythm. At our own comfortable pace. <em>Apse ho payega?</em> Bilkul ho payega.</p>
+        </article>
+      </div>
+
+      <div class="hero" style="margin-top:48px;padding:60px 24px; background: linear-gradient(135deg, #fff3f5 0%, #fffdfa 100%);">
+        <div class="script">One last birthday wish for you…</div>
+        <h2 style="font-size:clamp(2rem,5vw,3.5rem); margin-top: 10px;">May this year be so tender with you, Palak.</h2>
+        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">May you find happiness that feels truly yours, peace in your nights, and laughter in ordinary days. And whenever you want a cappuccino or a cuddle, I'll be right here waiting.</p>
+        
+        <div id="surpriseBtnContainer" class="btnrow" style="margin-top:35px;">
+          <button class="btn" id="openSurpriseBtn">Open your surprise ♡</button>
+        </div>
+
+        <div id="surpriseSection">
+          <div class="cake-container" id="cakeContainer">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&auto=format&fit=crop&q=80" alt="Birthday Cake" class="cake-img" id="cakeImg">
+            <div class="cake-instruction" id="cakeInstruction">Tap to cut the cake! 🔪🎂</div>
+          </div>
+          
+          <div id="surpriseMessage">
+            <p><strong>Cheers to be in 20s M'gurl! 🥂</strong></p>
+            <p>I just wanted to remind you that I love you. Always. ❤️</p>
+            <p style="font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--rose); margin-top: 20px;">I wish for you to achieve absolutely everything in your life.<br>The world is yours, Malkin Ji!</p>
+            <div class="btnrow" style="margin-top:30px;">
+              <button class="btn secondary" data-go="home">Back to the Beginning ♡</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<button class="float" id="topBtn" title="Back to top" aria-label="Back to top">↑</button>
+
+<script>
+// PAGE NAVIGATION
+const pages = [...document.querySelectorAll('.page')];
+const navBtns = [...document.querySelectorAll('.nav button[data-page]')];
+
+function showPage(id){
+  pages.forEach(p => p.classList.toggle('active', p.id === id));
+  navBtns.forEach(b => b.classList.toggle('active', b.dataset.page === id));
+  window.scrollTo({top:0, behavior:'smooth'});
+  history.replaceState(null, '', '#' + id);
+}
+
+navBtns.forEach(b => b.addEventListener('click', () => showPage(b.dataset.page)));
+document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => showPage(b.dataset.go)));
+
+if(location.hash && document.getElementById(location.hash.slice(1))?.classList.contains('page')){
+  showPage(location.hash.slice(1));
+}
+
+// FLOATING HEARTS EFFECT
+function spawnHeart(emoji){
+  const h = document.createElement('div');
+  h.className = 'floating-love';
+  
+  const colors = ['#c64e69', '#e25a77', '#ff8fa3', '#ffb3c1'];
+  h.style.color = colors[Math.floor(Math.random() * colors.length)];
+  
+  h.textContent = emoji || ['♡','♥','🌸','☕','✨','💕','🎀'][Math.floor(Math.random()*7)];
+  h.style.left = (5 + Math.random()*88) + '%';
+  h.style.fontSize = (18 + Math.random()*24) + 'px';
+  h.style.setProperty('--dur', (4 + Math.random()*3) + 's');
+  h.style.setProperty('--rot', (-35 + Math.random()*70) + 'deg');
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 7000);
+}
+
+document.getElementById('heartBtn').addEventListener('click', () => {
+  for(let i=0; i<12; i++){
+    setTimeout(() => spawnHeart('💖'), i*60);
+  }
+  const btn = document.getElementById('heartBtn');
+  btn.style.transform = 'scale(1.2)';
+  setTimeout(() => btn.style.transform = 'scale(1)', 200);
+});
+setInterval(() => { if(!document.hidden) spawnHeart(); }, 1800);
+
+// INTERACTIVE WAX SEAL
+const waxSeal = document.getElementById('waxSeal');
+const letterBody = document.getElementById('letterBody');
+const sealPrompt = document.getElementById('sealPrompt');
+const envelopeBox = document.getElementById('envelopeBox');
+
+waxSeal.addEventListener('click', () => {
+  waxSeal.style.transform = 'scale(0) rotate(180deg)';
+  waxSeal.style.opacity = '0';
+  sealPrompt.style.opacity = '0';
+  
+  setTimeout(() => {
+    waxSeal.style.display = 'none';
+    sealPrompt.style.display = 'none';
+    letterBody.classList.remove('letter-hidden');
+    letterBody.style.animation = 'pageIn 1s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    envelopeBox.style.background = '#fffefc';
+    
+    const emojis = ['💖','✨','🎂','🌸','💌'];
+    for(let i=0; i<20; i++){
+       setTimeout(() => spawnHeart(emojis[Math.floor(Math.random()*emojis.length)]), i*50);
+    }
+  }, 400);
+});
+
+// INTERACTIVE FUR BABIES (Web Audio Purrs & Chimes)
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playTone(freq, type, duration){
+  try{
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  }catch(e){}
+}
+
+window.petAnimal = function(type){
+  if(type === 'cat'){
+    playTone(330, 'sine', 0.3);
+    setTimeout(() => playTone(392, 'sine', 0.4), 200);
+    spawnHeart('🐾');
+    spawnHeart('🐈');
+  } else {
+    playTone(260, 'triangle', 0.2);
+    setTimeout(() => playTone(330, 'triangle', 0.25), 150);
+    spawnHeart('🐕');
+    spawnHeart('🦴');
+  }
+}
+
+// AMBIENT LULLABY MUSIC
+let musicPlaying = false;
+let musicInterval = null;
+const musicToggle = document.getElementById('musicToggle');
+const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]; 
+
+function startMusic(){
+  musicPlaying = true;
+  musicToggle.textContent = '⏸ Pause Melodies';
+  musicToggle.classList.add('playing');
+  
+  playTone(notes[0], 'sine', 2);
+  
+  musicInterval = setInterval(() => {
+    const randomNote = notes[Math.floor(Math.random() * notes.length)];
+    playTone(randomNote, 'sine', 2.5);
+    
+    if(Math.random() > 0.7) {
+       setTimeout(() => playTone(notes[(notes.indexOf(randomNote) + 2) % notes.length], 'sine', 2), 100);
+    }
+  }, 1800);
+}
+
+function stopMusic(){
+  musicPlaying = false;
+  musicToggle.textContent = '🎵 Play Melodies';
+  musicToggle.classList.remove('playing');
+  clearInterval(musicInterval);
+}
+
+musicToggle.addEventListener('click', () => {
+  if(musicPlaying) stopMusic();
+  else startMusic();
+});
+
+// PHOTO UPLOADER PREVIEWS
+document.getElementById('photoInput').addEventListener('change', function(e){
+  const files = e.target.files;
+  if(!files.length) return;
+  const polaroids = document.querySelectorAll('.polaroid img');
+  for(let i=0; i<Math.min(files.length, polaroids.length); i++){
+    polaroids[i].src = URL.createObjectURL(files[i]);
+  }
+});
+
+// DATE FORM HANDLER & WHATSAPP
+const form = document.getElementById('dateForm');
+const response = document.getElementById('dateResponse');
+
+function getPlanText(){
+  const picks = [...form.querySelectorAll('input[name="date"]:checked')].map(x => x.value);
+  const note = document.getElementById('dateNote').value.trim();
+  let text = `👑 Date Order from Malkin Ji Palak:\n\n`;
+  text += `☕ Vibes: ${picks.length ? picks.join(', ') : 'Surprise me!'}\n`;
+  if(note) text += `💭 Her Special Wish: ${note}\n`;
+  text += `\nNo rush. Just us. Cuddle me rest? ♡`;
+  return text;
+}
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  response.style.display = 'block';
+  response.textContent = `Your date plan is ready, Malkin Ji! ♡\n\n` + getPlanText();
+  response.style.whiteSpace = 'pre-line';
+  for(let i=0; i<10; i++) spawnHeart('🧁');
+  response.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+});
+
+document.getElementById('copyDate').addEventListener('click', async () => {
+  const txt = getPlanText();
+  try {
+    await navigator.clipboard.writeText(txt);
+    response.style.display = 'block';
+    response.textContent = 'Copied to clipboard! Send it to your favourite person ♡';
+  } catch(e) {
+    const textarea = document.createElement('textarea');
+    textarea.value = txt;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    response.style.display = 'block';
+    response.textContent = 'Copied to clipboard! Send it to your favourite person ♡';
+  }
+});
+
+document.getElementById('waDate').addEventListener('click', () => {
+  const txt = encodeURIComponent(getPlanText());
+  window.open(`https://api.whatsapp.com/send?text=${txt}`, '_blank');
+});
+
+// SURPRISE CAKE LOGIC
+const openSurpriseBtn = document.getElementById('openSurpriseBtn');
+const surpriseBtnContainer = document.getElementById('surpriseBtnContainer');
+const surpriseSection = document.getElementById('surpriseSection');
+const cakeContainer = document.getElementById('cakeContainer');
+const cakeImg = document.getElementById('cakeImg');
+const cakeInstruction = document.getElementById('cakeInstruction');
+const surpriseMessage = document.getElementById('surpriseMessage');
+
+let cakeCut = false;
+
+openSurpriseBtn.addEventListener('click', () => {
+  surpriseBtnContainer.style.display = 'none';
+  surpriseSection.style.display = 'block';
+  setTimeout(() => surpriseSection.scrollIntoView({behavior: 'smooth', block: 'center'}), 100);
+});
+
+cakeContainer.addEventListener('click', () => {
+  if(cakeCut) return;
+  cakeCut = true;
+  
+  cakeImg.style.opacity = '0';
+  setTimeout(() => {
+    cakeImg.src = 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=600&auto=format&fit=crop&q=80';
+    cakeImg.style.opacity = '1';
+  }, 300);
+  
+  cakeInstruction.style.display = 'none';
+  cakeContainer.style.cursor = 'default';
+  cakeContainer.style.transform = 'none';
+  
+  var duration = 4 * 1000;
+  var animationEnd = Date.now() + duration;
+  var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  var interval = setInterval(function() {
+    var timeLeft = animationEnd - Date.now();
+    if (timeLeft <= 0) {
+      return clearInterval(interval);
+    }
+    var particleCount = 50 * (timeLeft / duration);
+    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+  }, 250);
+
+  setTimeout(() => {
+     surpriseMessage.style.display = 'block';
+     surpriseMessage.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }, 800);
+});
+
+// TOP BUTTON
+document.getElementById('topBtn').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+</body>
+</html>
